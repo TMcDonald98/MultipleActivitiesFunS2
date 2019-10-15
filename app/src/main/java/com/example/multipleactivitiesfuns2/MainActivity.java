@@ -1,15 +1,38 @@
 package com.example.multipleactivitiesfuns2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MultipleActivitiesFunTag";
+    static final int LOGIN_REQUEST_CODE = 1; // unique integer
+    // for each of our requests for activity results
+    // our activity might have multiple requests for activity results
+    // the same callback onActivityResult() is called for all requests
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // this is a callback!!!
+        // executes when a result from an activity is available
+
+        // good practice
+        if (requestCode == LOGIN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // grab the "result" key's value out of data
+            String result = data.getStringExtra("result");
+            TextView tv = (TextView) findViewById(R.id.textView);
+            tv.setText(result);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +71,21 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("username", username);
                 intent.putExtra("pin", pin);
 
-                startActivity(intent);
+                // 1. 2.
+                //startActivity(intent);
+
+                // 3.
+                startActivityForResult(intent, LOGIN_REQUEST_CODE);
+            }
+        });
+
+        Button viewButton = (Button) findViewById(R.id.viewButton);
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 4. implicit intent example #1
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                // only two more lines of code
             }
         });
     }
