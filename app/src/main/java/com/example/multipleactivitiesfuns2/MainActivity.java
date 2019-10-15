@@ -37,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
                 // 1. explicit intent example
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 // source, destination
+
+                // 2. passing data into second activity
+                // we can add data to the intent via key-value pairs
+                // like dictionary or hash map
+                // lets say we want to pass a username and a pin to second activity
+                // which needs these info for some reason
+                String username = "spike";
+                int pin = 1234;
+                intent.putExtra("username", username);
+                intent.putExtra("pin", pin);
+
                 startActivity(intent);
             }
         });
