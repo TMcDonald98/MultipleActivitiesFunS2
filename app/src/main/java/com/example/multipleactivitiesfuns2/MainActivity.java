@@ -106,5 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // task: create a new activity called ShareActivity and add textview
     }
 }
