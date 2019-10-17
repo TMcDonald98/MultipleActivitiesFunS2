@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -85,7 +86,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // 4. implicit intent example #1
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                // only two more lines of code
+                // only three more lines of code
+                Uri guUri = Uri.parse("https://www.gonzaga.edu");
+                // uri - uniform resource identifier
+                intent.setData(guUri);
+                startActivity(intent);
+            }
+        });
+
+        Button sendButton = (Button) findViewById(R.id.sendButton);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 5. implicit intent example #2
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                // send a simple text message with some activity
+                intent.setType("text/plain"); // mime type (media)
+                intent.putExtra(Intent.EXTRA_TEXT, "My message to send :) :) :)");
+                startActivity(intent);
             }
         });
     }
